@@ -1,0 +1,19 @@
+{
+  "name": "project-template",
+  "version": "1.0.0",
+  "description": "Шаблон проекта для быстрого старта",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yakhinvadim/project-template.git"
+  },
+  "author": "Vadim Yakhin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yakhinvadim/project-template/issues"
+  },
+  "homepage": "https://github.com/yakhinvadim/project-template#readme"
+}
