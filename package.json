@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yakhinvadim/project-template/issues"
   },
-  "homepage": "https://github.com/yakhinvadim/project-template#readme"
+  "homepage": "https://github.com/yakhinvadim/project-template#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
 }
