@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "quotes": [2, "single"]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jquery": true
+  },
+}
