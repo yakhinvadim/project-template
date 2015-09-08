@@ -2,6 +2,7 @@
 
 var gulp         = require('gulp'),
     postcss      = require('gulp-postcss'),
+    precss       = require('precss'),
     autoprefixer = require('autoprefixer');
 
 
@@ -15,7 +16,8 @@ gulp.task('default', function() {
 gulp.task( 'css', function() {
 
   var processors = [
-    autoprefixer({ browsers: ['> 0.15% in RU'] })
+    autoprefixer({ browsers: ['> 0.15% in RU'] }),
+    precss()
   ];
 
   return gulp.src( 'src/css/*.css' )
