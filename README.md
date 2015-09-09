@@ -1,5 +1,5 @@
 # project-template
-Project template based on gulp and postcss.
+Project template based on gulp, jade and postcss.
 ## Install
 ```
 git clone https://github.com/yakhinvadim/project-template
@@ -12,4 +12,8 @@ gulp css
 ### build svg sprite
 ```
 gulp icons
+```
+### compile .jade to .html
+```
+gulp html
 ```

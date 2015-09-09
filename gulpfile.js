@@ -6,7 +6,8 @@ var gulp         = require('gulp'),
     postcss      = require('gulp-postcss'),
     precss       = require('precss'),
     autoprefixer = require('autoprefixer'),
-    path         = require('path');
+    path         = require('path'),
+    jade         = require('gulp-jade');
 
 
 // default
@@ -14,7 +15,7 @@ gulp.task('default', function() {
 });
 
 
-// postcss
+// process css with postcss
 
 gulp.task( 'css', function() {
 
@@ -30,7 +31,7 @@ gulp.task( 'css', function() {
 });
 
 
-// svg
+// build svg sprite from svg-icons
 
 gulp.task('icons', function() {
 
@@ -49,5 +50,16 @@ gulp.task('icons', function() {
     }))
     .pipe(svgstore())
     .pipe(gulp.dest('dest/img'));
+
+});
+
+
+// compile .jade to .html
+
+gulp.task('html', function() {
+
+  gulp.src('src/jade/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('dist'));
 
 });
