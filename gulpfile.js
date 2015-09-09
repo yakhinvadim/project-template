@@ -58,8 +58,8 @@ gulp.task('icons', function() {
 
 gulp.task('html', function() {
 
-  gulp.src('src/jade/*.jade')
+  gulp.src('src/*.jade')
     .pipe(jade())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dest'));
 
 });
