@@ -77,5 +77,8 @@ gulp.task('html', function() {
 // watch for changes
 
 gulp.task('watch', function() {
+
   gulp.watch(paths.css, ['css']);
+  gulp.watch(paths.jade, ['html']);
+
 });
