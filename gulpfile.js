@@ -70,3 +70,10 @@ gulp.task('html', function() {
     .pipe(gulp.dest('dest'));
 
 });
+
+
+// watch for changes
+
+gulp.task('watch', function() {
+  gulp.watch(paths.css, ['css']);
+});
