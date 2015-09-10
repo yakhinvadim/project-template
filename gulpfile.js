@@ -1,20 +1,21 @@
 'use strict';
 
 var gulp         = require('gulp'),
+    watch        = require('gulp-watch'),
+    jade         = require('gulp-jade'),
     svgstore     = require('gulp-svgstore'),
     svgmin       = require('gulp-svgmin'),
     postcss      = require('gulp-postcss'),
     precss       = require('precss'),
     autoprefixer = require('autoprefixer'),
-    path         = require('path'),
-    jade         = require('gulp-jade');
+    path         = require('path');
 
 var paths = {
   jade: 'src/*.jade',
   css: 'src/css/**/*.css',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
-  icons: 'src/icons/*.svg'
+  icons: 'src/img/icons/*.svg'
 };
 
 
@@ -78,7 +79,8 @@ gulp.task('html', function() {
 
 gulp.task('watch', function() {
 
-  gulp.watch(paths.css, ['css']);
-  gulp.watch(paths.jade, ['html']);
+  watch(paths.css,   function() { gulp.start('css');   });
+  watch(paths.jade,  function() { gulp.start('html');  });
+  watch(paths.icons, function() { gulp.start('icons'); });
 
 });
