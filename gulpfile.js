@@ -10,14 +10,16 @@ var gulp         = require('gulp'),
     jade         = require('gulp-jade');
 
 var paths = {
-  js: 'src/js/**/*.js',
+  jade: 'src/*.jade',
   css: 'src/css/**/*.css',
-  img: 'src/img/**/*',
-  jade: 'src/*.jade'
+  js: 'src/js/**/*.js',
+  img: 'src/img/*',
+  icons: 'src/icons/*.svg'
 };
 
 
 // default
+
 gulp.task('default', function() {
 });
 
