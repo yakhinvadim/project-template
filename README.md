@@ -5,16 +5,11 @@ Project template based on gulp, jade and postcss.
 git clone https://github.com/yakhinvadim/project-template && cd project-template
 npm install
 ```
-## Gulp tasks
-### build css
-```
-gulp css
-```
-### build svg sprite
-```
-gulp icons
-```
-### compile .jade to .html
-```
-gulp html
-```
+## Tasks
+
+Task | Command
+:--- | :---
+compile html | `gulp html`
+build css | `gulp css`
+build svg sprite | `gulp icons`
+watch changes | `gulp watch`
