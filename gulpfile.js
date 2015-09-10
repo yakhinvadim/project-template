@@ -9,6 +9,13 @@ var gulp         = require('gulp'),
     path         = require('path'),
     jade         = require('gulp-jade');
 
+var paths = {
+  js: 'src/js/**/*.js',
+  css: 'src/css/**/*.css',
+  img: 'src/img/**/*',
+  jade: 'src/*.jade'
+};
+
 
 // default
 gulp.task('default', function() {
