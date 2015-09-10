@@ -1,7 +1,7 @@
 {
   "rules": {
     "quotes": [2, "single"],
-    "no-multi-spaces": [2, { exceptions: { "VariableDeclarator": true } }]
+    "no-multi-spaces": [0]
   },
   "env": {
     "browser": true,
