@@ -6,6 +6,7 @@ var gulp         = require('gulp'),
     svgstore     = require('gulp-svgstore'),
     svgmin       = require('gulp-svgmin'),
     postcss      = require('gulp-postcss'),
+    sourcemaps   = require('gulp-sourcemaps'),
     precss       = require('precss'),
     autoprefixer = require('autoprefixer'),
     path         = require('path'),
@@ -36,7 +37,9 @@ gulp.task( 'css', function() {
   ];
 
   return gulp.src( 'src/css/*.css' )
-    .pipe( postcss( processors ))
+    .pipe(sourcemaps.init())
+    .pipe(postcss(processors))
+    .pipe(sourcemaps.write('.'))
     .pipe( gulp.dest('dest/css') );
 
 });
