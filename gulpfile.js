@@ -2,6 +2,7 @@
 
 var gulp         = require('gulp'),
     watch        = require('gulp-watch'),
+    plumber      = require('gulp-plumber'),
     jade         = require('gulp-jade'),
     svgstore     = require('gulp-svgstore'),
     svgmin       = require('gulp-svgmin'),
@@ -36,11 +37,12 @@ gulp.task( 'css', function() {
     precss()
   ];
 
-  return gulp.src( 'src/css/*.css' )
-    .pipe(sourcemaps.init())
-    .pipe(postcss(processors))
-    .pipe(sourcemaps.write('.'))
-    .pipe( gulp.dest('dest/css') );
+  gulp.src( 'src/css/*.css' )
+  .pipe(plumber())
+  .pipe(sourcemaps.init())
+  .pipe(postcss(processors))
+  .pipe(sourcemaps.write('.'))
+  .pipe( gulp.dest('dest/css') );
 
 });
 
@@ -49,21 +51,20 @@ gulp.task( 'css', function() {
 
 gulp.task('icons', function() {
 
-  return gulp
-    .src('src/img/icons/*.svg')
-    .pipe(svgmin(function(file) {
-      var prefix = path.basename(file.relative, path.extname(file.relative));
-      return {
-        plugins: [{
-          cleanupIDs: {
-            prefix: prefix + '-',
-            minify: true
-          }
-        }]
-      };
-    }))
-    .pipe(svgstore())
-    .pipe(gulp.dest('dest/img'));
+  gulp.src('src/img/icons/*.svg')
+  .pipe(svgmin(function(file) {
+    var prefix = path.basename(file.relative, path.extname(file.relative));
+    return {
+      plugins: [{
+        cleanupIDs: {
+          prefix: prefix + '-',
+          minify: true
+        }
+      }]
+    };
+  }))
+  .pipe(svgstore())
+  .pipe(gulp.dest('dest/img'));
 
 });
 
@@ -73,10 +74,11 @@ gulp.task('icons', function() {
 gulp.task('html', function() {
 
   gulp.src('src/*.jade')
-    .pipe(jade({
-      pretty: true
-    }))
-    .pipe(gulp.dest('dest'));
+  .pipe(plumber())
+  .pipe(jade({
+    pretty: true
+  }))
+  .pipe(gulp.dest('dest'));
 
 });
 
