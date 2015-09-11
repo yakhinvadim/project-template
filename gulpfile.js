@@ -103,3 +103,12 @@ gulp.task('clean', function() {
   del('dest/**');
 
 });
+
+
+//build
+
+gulp.task('build', function() {
+
+  gulp.start(['html', 'css', 'js', 'img', 'icons', 'favicons']);
+
+});
