@@ -8,7 +8,8 @@ var gulp         = require('gulp'),
     postcss      = require('gulp-postcss'),
     precss       = require('precss'),
     autoprefixer = require('autoprefixer'),
-    path         = require('path');
+    path         = require('path'),
+    del          = require('del');
 
 var paths = {
   jade: 'src/*.jade',
@@ -82,5 +83,14 @@ gulp.task('watch', function() {
   watch(paths.css,   function() { gulp.start('css');   });
   watch(paths.jade,  function() { gulp.start('html');  });
   watch(paths.icons, function() { gulp.start('icons'); });
+
+});
+
+
+// clean
+
+gulp.task('clean', function() {
+
+  del('dest/**');
 
 });
