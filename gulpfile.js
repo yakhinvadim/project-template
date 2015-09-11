@@ -11,7 +11,8 @@ var gulp         = require('gulp'),
     precss       = require('precss'),
     autoprefixer = require('autoprefixer'),
     path         = require('path'),
-    del          = require('del');
+    del          = require('del'),
+    concatCss    = require('gulp-concat-css');
 
 var paths = {
   jade: 'src/*.jade',
@@ -37,8 +38,9 @@ gulp.task( 'css', function() {
     precss()
   ];
 
-  gulp.src( 'src/css/*.css' )
+  gulp.src( 'src/css/style.css' )
   .pipe(plumber())
+  .pipe(concatCss('style.css'))
   .pipe(sourcemaps.init())
   .pipe(postcss(processors))
   .pipe(sourcemaps.write('.'))
