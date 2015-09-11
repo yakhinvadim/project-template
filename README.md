@@ -14,3 +14,4 @@ build css | `gulp css`
 build svg sprite | `gulp icons`
 watch changes | `gulp watch`
 clean dest folder | `gulp clean`
+run localhost:9080 | `static-server dest`
