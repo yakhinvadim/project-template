@@ -1,3 +1,10 @@
-div {
+/*div {
   display: flex;
+}*/
+$bg: red;
+$column: 200px;
+
+.block {
+  background: $bg;
+  height: $column;
 }
