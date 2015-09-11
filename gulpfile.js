@@ -15,7 +15,7 @@ var gulp         = require('gulp'),
     concatCss    = require('gulp-concat-css');
 
 var paths = {
-  jade: 'src/*.jade',
+  jade: 'src/**/*.jade',
   css: 'src/css/**/*.css',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
