@@ -70,7 +70,9 @@ gulp.task('icons', function() {
 gulp.task('html', function() {
 
   gulp.src('src/*.jade')
-    .pipe(jade())
+    .pipe(jade({
+      pretty: true
+    }))
     .pipe(gulp.dest('dest'));
 
 });
