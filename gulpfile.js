@@ -110,7 +110,7 @@ gulp.task('clean', function() {
 
 gulp.task('build', function() {
 
-  gulp.start(['html', 'css', 'js', 'img', 'icons', 'favicons']);
+  gulp.start(['html', 'css', 'js', 'img', 'icons']);
 
 });
 
