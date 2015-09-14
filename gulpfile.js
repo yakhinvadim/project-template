@@ -4,6 +4,7 @@ var gulp         = require('gulp'),
     watch        = require('gulp-watch'),
     plumber      = require('gulp-plumber'),
     jade         = require('gulp-jade'),
+    imagemin     = require('gulp-imagemin'),
     svgstore     = require('gulp-svgstore'),
     svgmin       = require('gulp-svgmin'),
     postcss      = require('gulp-postcss'),
@@ -105,10 +106,24 @@ gulp.task('clean', function() {
 });
 
 
-//build
+// build
 
 gulp.task('build', function() {
 
   gulp.start(['html', 'css', 'js', 'img', 'icons', 'favicons']);
 
+});
+
+
+// process images
+
+gulp.task('img', function () {
+  return gulp.src(paths.img)
+    .pipe(imagemin({
+      optimizationLevel: 2,
+      progressive: true,
+      interlaced: true,
+      multipass: true
+    }))
+    .pipe(gulp.dest('dest/img'));
 });
