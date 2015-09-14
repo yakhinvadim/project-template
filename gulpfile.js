@@ -6,7 +6,6 @@ var gulp         = require('gulp'),
     jade         = require('gulp-jade'),
     imagemin     = require('gulp-imagemin'),
     svgstore     = require('gulp-svgstore'),
-    svgmin       = require('gulp-svgmin'),
     postcss      = require('gulp-postcss'),
     sourcemaps   = require('gulp-sourcemaps'),
     precss       = require('precss'),
@@ -55,18 +54,10 @@ gulp.task( 'css', function() {
 gulp.task('icons', function() {
 
   gulp.src('src/img/icons/*.svg')
-  .pipe(svgmin(function(file) {
-    var prefix = path.basename(file.relative, path.extname(file.relative));
-    return {
-      plugins: [{
-        cleanupIDs: {
-          prefix: prefix + '-',
-          minify: true
-        }
-      }]
-    };
-  }))
   .pipe(svgstore())
+  .pipe(imagemin({
+    multipass: true
+  }))
   .pipe(gulp.dest('dest/img'));
 
 });
