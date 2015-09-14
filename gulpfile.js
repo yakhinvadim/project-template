@@ -90,8 +90,9 @@ gulp.task('html', function() {
 
 gulp.task('watch', function() {
 
-  watch(paths.css,   function() { gulp.start('css');   });
   watch(paths.jade,  function() { gulp.start('html');  });
+  watch(paths.css,   function() { gulp.start('css');   });
+  watch(paths.img,   function() { gulp.start('img');   });
   watch(paths.icons, function() { gulp.start('icons'); });
 
 });
