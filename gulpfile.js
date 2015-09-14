@@ -128,3 +128,11 @@ gulp.task('img', function () {
     }))
     .pipe(gulp.dest('dest/img'));
 });
+
+
+// js
+
+gulp.task('js', function() {
+  gulp.src(paths.js)
+  .pipe(gulp.dest('dest/js'))
+});
