@@ -12,7 +12,8 @@ var gulp         = require('gulp'),
     autoprefixer = require('autoprefixer'),
     path         = require('path'),
     del          = require('del'),
-    concatCss    = require('gulp-concat-css');
+    concatCss    = require('gulp-concat-css'),
+    ftp          = require('vinyl-ftp');
 
 var paths = {
   jade: 'src/**/*.jade',
@@ -126,4 +127,22 @@ gulp.task('img', function () {
 gulp.task('js', function() {
   gulp.src(paths.js)
   .pipe(gulp.dest('dest/js'))
+});
+
+
+// ftp
+
+gulp.task('ftp', function() {
+
+  var conn = ftp.create({
+    host:     '',
+    user:     '',
+    password: '',
+    parallel: 10
+  });
+
+  return gulp.src( 'dest/**/*' , { buffer: false } )
+    .pipe( conn.newer( '/public_html' ) )
+    .pipe( conn.dest( '/public_html' ) );
+
 });
