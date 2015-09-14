@@ -19,7 +19,7 @@ var paths = {
   css: 'src/css/**/*.css',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
-  icons: 'src/img/icons/*.svg'
+  icons: 'src/icons/*'
 };
 
 
