@@ -1,3 +1,6 @@
+$bg-color: red;
+
 div {
   display: flex;
+  background: $bg-color;
 }
