@@ -1,11 +1,15 @@
 doctype html
 html(lang="ru")
   head
-    include head
-    
+    meta(charset="UTF-8")
+    block title  
+    link(rel="stylesheet", href="css/style.css")
+      
   body
     include header
     
     block content                    
     
     include footer
+
+    script(scr="js/main.js")
