@@ -12,8 +12,9 @@ var autoprefixer = require('autoprefixer'),
     svgstore     = require('gulp-svgstore'),
     watch        = require('gulp-watch'),
     path         = require('path'),
+    calc         = require('postcss-calc'),
     precss       = require('precss'),
-    ftp          = require('vinyl-ftp'),
+    ftp          = require('vinyl-ftp');
 
 var paths = {
   jade: 'src/**/*.jade',
@@ -87,6 +88,7 @@ gulp.task('css', function() {
 
   var processors = [
     precss(),
+    calc(),
     autoprefixer({ browsers: ['> 0.15% in RU'] })
   ];
 
