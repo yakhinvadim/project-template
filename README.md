@@ -15,7 +15,7 @@ Command | Task
 `gulp watch` | watch for changes in source folders and automatically run tasks to process these changes
 `gulp html` | compile .jade files to .html files
 `gulp css` | concatenate .css files, process css with postcss-processors, create source-map for result css
-`gulp js` | copy .js files from src to dest folder without changes
+`gulp js` | copy .js files from src to dist folder without changes
 `gulp img` | optimize images
 `gulp icons` | build svg-sprite from separate svg-icons
 `gulp ftp` | upload dist folder to ftp (don't forget to provide credentials and upload address in gulpfile.js)
