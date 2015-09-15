@@ -140,7 +140,7 @@ gulp.task('img', function () {
 
 gulp.task('icons', function() {
 
-  gulp.src('src/img/icons/*.svg')
+  gulp.src('src/icons/*.svg')
   .pipe( svgstore() )
   .pipe( imagemin({ multipass: true }))
   .pipe( gulp.dest('dist/img') );
