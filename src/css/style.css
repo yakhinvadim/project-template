@@ -1,11 +1,6 @@
 @import '../../node_modules/normalize.css/normalize.css';
 @import 'grid.css';
 
-$bg-color: red;
-
-div {
-  display: flex;
-  background: $bg-color;
-}
+/*new styles goes here*/
 
 @import 'print.css';

@@ -2,15 +2,6 @@
   box-sizing: border-box;
 }
 
-/* variables for grid */
-$gutter: 30px;
-$screen-xs: 0;
-$screen-sm: 480px;
-$screen-md: 768px;
-$screen-lg: 992px;
-$screen-xl: 1200px;
-
-
 /* -------------------------------------------------- */
 
 /* container */
