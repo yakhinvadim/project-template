@@ -35,8 +35,8 @@ gulp.task('default', function() {
 gulp.task( 'css', function() {
 
   var processors = [
-    autoprefixer({ browsers: ['> 0.15% in RU'] }),
-    precss()
+    precss(),
+    autoprefixer({ browsers: ['> 0.15% in RU'] })
   ];
 
   gulp.src( 'src/css/style.css' )
