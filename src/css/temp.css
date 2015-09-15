@@ -1,0 +1,86 @@
+@import 'variables.css';
+@import 'grid.css';
+
+html {
+  font-size:62.5%;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+}
+
+html, body {
+  height:100%;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: normal;
+}
+
+.main_wrapper {
+
+}
+
+/* grid-example */
+[class*="col-"] {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: $kodix-color-75;
+    border: 1px solid $kodix-color;
+    color: $white-75;
+    font-weight: 600;
+}
+.row {
+  margin-bottom: 45px;
+}
+
+
+/* page-example */
+.main-header {
+  min-height: 131px;
+  position: relative;
+  background: #f3f3f3;
+  border-bottom: 1px solid #d3d3d3;
+  & .logo {
+    height: 130px;
+    display: block;
+    float: left;
+  }
+
+  /*primary nav*/
+  .primary_nav {
+    float: left;
+    margin-top: 60px;
+    margin-left: 50px;
+    & ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+  .primary_nav_item {
+    float: left;
+    margin-right: 23px;
+  }
+  .primary_nav_link {
+    display: block;
+    font-size: 14px;
+    color: $kodix-color;
+    line-height: 13px;
+    text-decoration: none;
+    box-shadow: 0 1px 0 0 $kodix-color;
+  }
+  .primary_nav_link:hover {
+    color: $kodix-color-75;
+    box-shadow: 0 1px 0 0 $kodix-color-75;
+  }
+}
+
+.main-content {
+  width: 1200px;
+  padding: 45px 15px;
+  margin: 0 auto;
+  & h3 {
+    padding-top: 20px;
+  }
+}

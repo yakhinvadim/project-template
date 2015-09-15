@@ -1,0 +1,22 @@
+/* defaul colors */
+$white:             rgba(255,255,255,  1);
+$white-75:          rgba(255,255,255,.75);
+$white-50:          rgba(255,255,255,.50);
+$white-25:          rgba(255,255,255,.25);
+$white-05:          rgba(255,255,255,.05);
+
+$black:             rgba(0,0,0,  1);
+$black-75:          rgba(0,0,0,.75);
+$black-50:          rgba(0,0,0,.50);
+$black-25:          rgba(0,0,0,.25);
+$black-05:          rgba(0,0,0,.05);
+
+/* primary project color */
+$kodix-color:       rgba(64,24,93,  1);
+$kodix-color-75:    rgba(64,24,93,.75);
+$kodix-color-50:    rgba(64,24,93,.50);
+$kodix-color-25:    rgba(64,24,93,.25);
+$kodix-color-05:    rgba(64,24,93,.05);
+
+/* text */
+$primary-text:      rgba(68,68,68,1);

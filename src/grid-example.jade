@@ -1,0 +1,36 @@
+extend templates/page
+
+block title
+  title ˚ Grid ˚
+
+block content
+    .main_wrapper
+      .grid_container_fixed
+          .page-header
+            h1 Grid examples
+        
+          hr    
+          h3 Three equal columns
+          .grid_row
+            .col-md-4 .col-md-4
+            .col-md-4 .col-md-4
+            .col-md-4 .col-md-4
+        
+          hr  
+          h3 Three unequal columns
+          .grid_row
+            .col-md-3 .col-md-3
+            .col-md-6 .col-md-6
+            .col-md-3 .col-md-3
+      
+          hr  
+          h3 Two columns
+          .grid_row
+            .col-md-8 .col-md-8
+            .col-md-4 .col-md-4
+        
+          hr  
+          h3 Full width, single column
+          p.text-warning No grid classes are necessary for full-width elements.
+
+    
