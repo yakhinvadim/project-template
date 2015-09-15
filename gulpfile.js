@@ -26,7 +26,7 @@ var paths = {
 
 /* ==========================================================================
    'gulp' task
-   (does nothing)
+   (do nothing)
    ========================================================================== */
 
 gulp.task('default', function() {
@@ -36,7 +36,7 @@ gulp.task('default', function() {
 
 /* ==========================================================================
    'gulp build' task
-   (builds 'dist' folder from 'src' folder)
+   (build 'dist' folder from 'src' folder)
    ========================================================================== */
 
 gulp.task('build', ['clean'], function() {
@@ -48,7 +48,7 @@ gulp.task('build', ['clean'], function() {
 
 /* ==========================================================================
    'gulp watch' task
-   (watches for changes in source folders and automatically runs tasks
+   (watch for changes in source folders and automatically run tasks
    to process these changes)
    ========================================================================== */
 
@@ -80,9 +80,7 @@ gulp.task('html', function() {
 
 /* ==========================================================================
    'gulp css' task
-   (1. concatenate .css files
-    2. process css with postcss-processors
-    3. creates source-map for result css)
+   (concatenate .css files, process css with postcss-processors, create source-map for result css)
    ========================================================================== */
 
 gulp.task('css', function() {
@@ -105,7 +103,7 @@ gulp.task('css', function() {
 
 /* ==========================================================================
    'gulp js' task
-   (copies .js files from src to dest folder without changes)
+   (copy .js files from src to dest folder without changes)
    ========================================================================== */
 
 gulp.task('js', function() {
@@ -134,8 +132,8 @@ gulp.task('img', function () {
 
 
 /* ==========================================================================
-   'gulp img' task
-   (builds svg-sprite from a bunch of separate svg-icons)
+   'gulp icons' task
+   (build svg-sprite from separate svg-icons)
    ========================================================================== */
 
 gulp.task('icons', function() {
@@ -150,7 +148,7 @@ gulp.task('icons', function() {
 
 /* ==========================================================================
    'gulp ftp' task
-   (upload dist folder to provided ftp address)
+   (upload dist folder to ftp)
    ========================================================================== */
 
 gulp.task('ftp', function() {
@@ -162,9 +160,11 @@ gulp.task('ftp', function() {
     parallel: 10
   });
 
+  var uploadAddress = '/public_html';
+
   return gulp.src('dist/**/*' , { buffer: false })
-    .pipe( conn.newer('/public_html') )
-    .pipe( conn.dest('/public_html') );
+    .pipe( conn.newer( uploadAddress ) )
+    .pipe( conn.dest( uploadAddress ) );
 
 });
 
