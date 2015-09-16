@@ -98,7 +98,7 @@ gulp.task('css', function() {
   .pipe( sourcemaps.init() )
   .pipe( postcss(processors) )
   .pipe( sourcemaps.write('.') )
-  .pipe( gulp.dest('dist/css') );
+  .pipe( gulp.dest('dist/resources/css') );
 
 });
 
@@ -111,7 +111,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
 
   gulp.src( paths.js )
-  .pipe( gulp.dest('dist/js') )
+  .pipe( gulp.dest('dist/resources/js') )
 
 });
 
@@ -129,7 +129,7 @@ gulp.task('img', function () {
       interlaced: true,
       multipass: true
     }))
-    .pipe( gulp.dest('dist/img') );
+    .pipe( gulp.dest('dist/resources/img') );
 });
 
 
@@ -143,7 +143,7 @@ gulp.task('icons', function() {
   gulp.src('src/icons/*.svg')
   .pipe( svgstore() )
   .pipe( imagemin({ multipass: true }))
-  .pipe( gulp.dest('dist/img') );
+  .pipe( gulp.dest('dist/resources/img') );
 
 });
 
