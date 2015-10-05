@@ -3,7 +3,6 @@
 var autoprefixer = require('autoprefixer'),
     del          = require('del'),
     gulp         = require('gulp'),
-    concatCss    = require('gulp-concat-css'),
     imagemin     = require('gulp-imagemin'),
     jade         = require('gulp-jade'),
     plumber      = require('gulp-plumber'),
@@ -93,7 +92,6 @@ gulp.task('css', function() {
 
   gulp.src('src/css/style.css')
   .pipe( plumber() )
-  .pipe( concatCss('style.css') )
   .pipe( sourcemaps.init() )
   .pipe( postcss(processors) )
   .pipe( sourcemaps.write('.') )
