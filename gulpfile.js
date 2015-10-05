@@ -1,7 +1,6 @@
 'use strict';
 
 var autoprefixer = require('autoprefixer'),
-    del          = require('del'),
     gulp         = require('gulp'),
     imagemin     = require('gulp-imagemin'),
     jade         = require('gulp-jade'),
@@ -13,6 +12,9 @@ var autoprefixer = require('autoprefixer'),
     calc         = require('postcss-calc'),
     precss       = require('precss'),
     ftp          = require('vinyl-ftp');
+
+var rimraf = require('rimraf');
+var seq = require('run-sequence');
 
 var paths = {
   jade: 'src/**/*.jade',
@@ -37,10 +39,9 @@ gulp.task('default', function() {
    'gulp build' task
    (build 'dist' folder from 'src' folder)
    ========================================================================== */
+gulp.task('build', function(cb) {
 
-gulp.task('build', ['clean'], function() {
-
-  gulp.start(['html', 'css', 'js', 'img', 'icons']);
+  seq('clean', ['html', 'css', 'js', 'img', 'icons'], cb);
 
 });
 
@@ -69,10 +70,10 @@ gulp.task('watch', function() {
 
 gulp.task('html', function() {
 
-  gulp.src('src/*.jade')
-  .pipe( plumber() )
-  .pipe( jade({ pretty: true }) )
-  .pipe( gulp.dest('dist') );
+  return gulp.src('src/*.jade')
+    .pipe( plumber() )
+    .pipe( jade({ pretty: true }) )
+    .pipe( gulp.dest('dist') );
 
 });
 
@@ -81,21 +82,20 @@ gulp.task('html', function() {
    'gulp css' task
    (concatenate .css files, process css with postcss-processors, create source-map for result css)
    ========================================================================== */
+var processors = [
+  precss(),
+  calc(),
+  autoprefixer({ browsers: ['> 0.15% in RU'] })
+];
 
 gulp.task('css', function() {
 
-  var processors = [
-    precss(),
-    calc(),
-    autoprefixer({ browsers: ['> 0.15% in RU'] })
-  ];
-
-  gulp.src('src/css/style.css')
-  .pipe( plumber() )
-  .pipe( sourcemaps.init() )
-  .pipe( postcss(processors) )
-  .pipe( sourcemaps.write('.') )
-  .pipe( gulp.dest('dist/resources/css') );
+  return gulp.src('src/css/style.css')
+    .pipe( plumber() )
+    .pipe( sourcemaps.init() )
+    .pipe( postcss(processors) )
+    .pipe( sourcemaps.write('.') )
+    .pipe( gulp.dest('dist/resources/css') );
 
 });
 
@@ -107,8 +107,8 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
 
-  gulp.src( paths.js )
-  .pipe( gulp.dest('dist/resources/js') )
+  return gulp.src( paths.js )
+    .pipe( gulp.dest('dist/resources/js') )
 
 });
 
@@ -137,11 +137,10 @@ gulp.task('img', function () {
 
 gulp.task('icons', function() {
 
-  gulp.src('src/icons/*.svg')
-  .pipe( svgstore() )
-  .pipe( imagemin({ multipass: true }))
-  .pipe( gulp.dest('dist/resources/img') );
-
+  return gulp.src('src/icons/*.svg')
+    .pipe( svgstore() )
+    .pipe( imagemin({ multipass: true }))
+    .pipe( gulp.dest('dist/resources/img') );
 });
 
 
@@ -151,7 +150,6 @@ gulp.task('icons', function() {
    ========================================================================== */
 
 gulp.task('ftp', function() {
-
   var conn = ftp.create({
     host:     '',
     user:     '',
@@ -164,7 +162,6 @@ gulp.task('ftp', function() {
   return gulp.src('dist/**/*' , { buffer: false })
     .pipe( conn.newer( uploadAddress ) )
     .pipe( conn.dest( uploadAddress ) );
-
 });
 
 
@@ -173,8 +170,8 @@ gulp.task('ftp', function() {
    (delete dist folder)
    ========================================================================== */
 
-gulp.task('clean', function() {
+gulp.task('clean', function(cb) {
 
-  del('dist/**');
+  rimraf('dist', cb);
 
 });
