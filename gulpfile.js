@@ -11,7 +11,6 @@ var autoprefixer = require('autoprefixer'),
     sourcemaps   = require('gulp-sourcemaps'),
     svgstore     = require('gulp-svgstore'),
     watch        = require('gulp-watch'),
-    path         = require('path'),
     calc         = require('postcss-calc'),
     precss       = require('precss'),
     ftp          = require('vinyl-ftp');
