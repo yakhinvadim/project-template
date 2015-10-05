@@ -52,13 +52,13 @@ gulp.task('build', function(cb) {
    to process these changes)
    ========================================================================== */
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
 
-  watch( paths.jade,  function() { gulp.start('html');  });
-  watch( paths.css,   function() { gulp.start('css');   });
-  watch( paths.js,    function() { gulp.start('js');    });
-  watch( paths.img,   function() { gulp.start('img');   });
-  watch( paths.icons, function() { gulp.start('icons'); });
+  watch( paths.jade,  function() { seq('html');  });
+  watch( paths.css,   function() { seq('css');   });
+  watch( paths.js,    function() { seq('js');    });
+  watch( paths.img,   function() { seq('img');   });
+  watch( paths.icons, function() { seq('icons'); });
 
 });
 
