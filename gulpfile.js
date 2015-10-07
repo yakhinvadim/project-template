@@ -86,7 +86,7 @@ gulp.task('watch', ['build'], function() {
   watch( paths.js,    function() { seq('js');    });
   watch( paths.img,   function() { seq('img');   });
   watch( paths.icons, function() { seq('icons'); });
-  watch( paths.temp, function() { seq('temp');  });
+  watch( paths.temp,  function() { seq('temp');  });
 });
 
 
