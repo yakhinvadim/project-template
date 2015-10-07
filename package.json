@@ -28,6 +28,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-svgmin": "^1.2.0",
     "gulp-svgstore": "^5.0.4",
+    "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
     "normalize.css": "^3.0.3",
     "postcss-calc": "^5.0.0",

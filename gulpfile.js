@@ -9,12 +9,14 @@ var autoprefixer = require('autoprefixer'),
     sourcemaps   = require('gulp-sourcemaps'),
     svgstore     = require('gulp-svgstore'),
     watch        = require('gulp-watch'),
+    gutil        = require('gulp-util'),
     calc         = require('postcss-calc'),
     precss       = require('precss'),
     ftp          = require('vinyl-ftp'),
     rimraf       = require('rimraf'),
     seq          = require('run-sequence'),
     express      = require('express');
+
 
 /* ==========================================================================
    variables
@@ -43,6 +45,12 @@ var ftpConnection = ftp.create({
 
 var ftpUploadAddress = '/public_html';
 
+// error handler
+var onError = function (err) {
+  gutil.beep();
+  console.log(err);
+};
+
 
 /* ==========================================================================
    'gulp' task
@@ -50,7 +58,7 @@ var ftpUploadAddress = '/public_html';
    ========================================================================== */
 
 gulp.task('default', function(cb) {
-  seq('watch', 'express', cb);
+  seq('watch', 'localhost', cb);
 });
 
 
@@ -106,7 +114,7 @@ gulp.task('localhost', function() {
 
 gulp.task('html', function() {
   return gulp.src( paths.jade )
-    .pipe( plumber() )
+    .pipe( plumber({ errorHandler: onError }))
     .pipe( jade({ pretty: true }) )
     .pipe( gulp.dest('dist') );
 });
@@ -120,7 +128,7 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
   return gulp.src('src/css/style.css')
-    .pipe( plumber() )
+    .pipe( plumber({ errorHandler: onError }))
     .pipe( sourcemaps.init() )
     .pipe( postcss(postcssProcessors) )
     .pipe( sourcemaps.write('.') )
