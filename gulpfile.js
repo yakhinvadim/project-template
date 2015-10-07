@@ -27,7 +27,8 @@ var paths = {
   css: 'src/css/**/*.css',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
-  icons: 'src/icons/*.svg'
+  icons: 'src/icons/*.svg',
+  temp: 'src/temp/*'
 };
 
 var postcssProcessors = [
@@ -69,7 +70,7 @@ gulp.task('default', function(cb) {
    ========================================================================== */
 
 gulp.task('build', function(cb) {
-  seq('clean', ['html', 'css', 'js', 'img', 'icons'], cb);
+  seq('clean', ['html', 'css', 'js', 'img', 'icons', 'temp'], cb);
 });
 
 
@@ -85,6 +86,7 @@ gulp.task('watch', ['build'], function() {
   watch( paths.js,    function() { seq('js');    });
   watch( paths.img,   function() { seq('img');   });
   watch( paths.icons, function() { seq('icons'); });
+  watch( paths.temp, function() { seq('temp');  });
 });
 
 
@@ -175,6 +177,17 @@ gulp.task('icons', function() {
     .pipe( svgstore() )
     .pipe( imagemin({ multipass: true }))
     .pipe( gulp.dest('dist/resources/img') );
+});
+
+
+/* ==========================================================================
+   'gulp temp' task
+   (copy temp files (used only in development))
+   ========================================================================== */
+
+gulp.task('temp', function() {
+  return gulp.src( paths.temp )
+    .pipe( gulp.dest('dist/temp') )
 });
 
 
