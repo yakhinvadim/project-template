@@ -58,7 +58,7 @@ var onError = function(err) {
    ========================================================================== */
 
 gulp.task('default', function(cb) {
-  seq('watch', 'localhost', cb);
+  seq('watch', 'server', cb);
 });
 
 gulp.task('build', function(cb) {
@@ -78,7 +78,7 @@ gulp.task('clean', function(cb) {
   rimraf('dist', cb);
 });
 
-gulp.task('localhost', function() {
+gulp.task('server', function() {
   express().use(express.static('dist')).listen(4000);
 });
 
