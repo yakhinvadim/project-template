@@ -19,7 +19,7 @@ var autoprefixer = require('autoprefixer'),
 
 
 /* ==========================================================================
-   variables
+   Variables
    ========================================================================== */
 
 var paths = {
@@ -46,8 +46,7 @@ var ftpConnection = ftp.create({
 
 var ftpUploadAddress = '/public_html';
 
-// error handler
-var onError = function (err) {
+var onError = function(err) {
   gutil.beep();
   console.log(err);
   this.emit('end');
@@ -55,30 +54,16 @@ var onError = function (err) {
 
 
 /* ==========================================================================
-   'gulp' task
-   (build 'dist' folder, run localhost and watch for changes)
+   Tasks
    ========================================================================== */
 
 gulp.task('default', function(cb) {
   seq('watch', 'localhost', cb);
 });
 
-
-/* ==========================================================================
-   'gulp build' task
-   (build 'dist' folder from 'src' folder)
-   ========================================================================== */
-
 gulp.task('build', function(cb) {
   seq('clean', ['html', 'css', 'js', 'img', 'icons', 'temp'], cb);
 });
-
-
-/* ==========================================================================
-   'gulp watch' task
-   (watch for changes in source folders and automatically run tasks
-   to process these changes)
-   ========================================================================== */
 
 gulp.task('watch', ['build'], function() {
   watch( paths.jade,  function() { seq('html');  });
@@ -89,31 +74,13 @@ gulp.task('watch', ['build'], function() {
   watch( paths.temp,  function() { seq('temp');  });
 });
 
-
-/* ==========================================================================
-   'gulp clean' task
-   (delete dist folder)
-   ========================================================================== */
-
 gulp.task('clean', function(cb) {
   rimraf('dist', cb);
 });
 
-
-/* ==========================================================================
-   'gulp localhost' task
-   (run localhost:4000)
-   ========================================================================== */
-
 gulp.task('localhost', function() {
   express().use(express.static('dist')).listen(4000);
 });
-
-
-/* ==========================================================================
-   'gulp html' task
-   (compile .jade files to .html files)
-   ========================================================================== */
 
 gulp.task('html', function() {
   return gulp.src( paths.jade )
@@ -121,13 +88,6 @@ gulp.task('html', function() {
     .pipe( jade({ pretty: true }) )
     .pipe( gulp.dest('dist') );
 });
-
-
-/* ==========================================================================
-   'gulp css' task
-   (concatenate .css files, process css with postcss-processors,
-    create source-map for result css)
-   ========================================================================== */
 
 gulp.task('css', function() {
   return gulp.src('src/css/style.css')
@@ -138,22 +98,10 @@ gulp.task('css', function() {
     .pipe( gulp.dest('dist/resources/css') );
 });
 
-
-/* ==========================================================================
-   'gulp js' task
-   (copy .js files from src to dest folder without changes)
-   ========================================================================== */
-
 gulp.task('js', function() {
   return gulp.src( paths.js )
     .pipe( gulp.dest('dist/resources/js') )
 });
-
-
-/* ==========================================================================
-   'gulp img' task
-   (optimize images)
-   ========================================================================== */
 
 gulp.task('img', function () {
   return gulp.src( paths.img )
@@ -166,12 +114,6 @@ gulp.task('img', function () {
     .pipe( gulp.dest('dist/resources/img') );
 });
 
-
-/* ==========================================================================
-   'gulp icons' task
-   (build svg-sprite from separate svg-icons)
-   ========================================================================== */
-
 gulp.task('icons', function() {
   return gulp.src( paths.icons )
     .pipe( svgstore() )
@@ -179,22 +121,10 @@ gulp.task('icons', function() {
     .pipe( gulp.dest('dist/resources/img') );
 });
 
-
-/* ==========================================================================
-   'gulp temp' task
-   (copy temp files (used only in development))
-   ========================================================================== */
-
 gulp.task('temp', function() {
   return gulp.src( paths.temp )
     .pipe( gulp.dest('dist/temp') )
 });
-
-
-/* ==========================================================================
-   'gulp ftp' task
-   (upload dist folder to ftp)
-   ========================================================================== */
 
 gulp.task('ftp', function() {
   return gulp.src('dist/**/*' , { buffer: false })
