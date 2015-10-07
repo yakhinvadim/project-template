@@ -46,7 +46,7 @@ var ftpUploadAddress = '/public_html';
 
 /* ==========================================================================
    'gulp' task
-   (do nothing)
+   (build 'dist' folder, run localhost and watch for changes)
    ========================================================================== */
 
 gulp.task('default', function(cb) {
@@ -76,6 +76,26 @@ gulp.task('watch', ['build'], function() {
   watch( paths.js,    function() { seq('js');    });
   watch( paths.img,   function() { seq('img');   });
   watch( paths.icons, function() { seq('icons'); });
+});
+
+
+/* ==========================================================================
+   'gulp clean' task
+   (delete dist folder)
+   ========================================================================== */
+
+gulp.task('clean', function(cb) {
+  rimraf('dist', cb);
+});
+
+
+/* ==========================================================================
+   'gulp localhost' task
+   (run localhost:4000)
+   ========================================================================== */
+
+gulp.task('localhost', function() {
+  express().use(express.static('dist')).listen(4000);
 });
 
 
@@ -158,23 +178,4 @@ gulp.task('ftp', function() {
   return gulp.src('dist/**/*' , { buffer: false })
     .pipe( ftpConnection.newer( ftpUploadAddress ) )
     .pipe( ftpConnection.dest( ftpUploadAddress ) );
-});
-
-
-/* ==========================================================================
-   'gulp clean' task
-   (delete dist folder)
-   ========================================================================== */
-
-gulp.task('clean', function(cb) {
-  rimraf('dist', cb);
-});
-
-/* ==========================================================================
-   'gulp server' task
-   (run localhost:4000)
-   ========================================================================== */
-
-gulp.task('express', function() {
-  express().use(express.static('dist')).listen(4000);
 });
