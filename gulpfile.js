@@ -48,7 +48,8 @@ var ftpUploadAddress = '/public_html';
    (do nothing)
    ========================================================================== */
 
-gulp.task('default', function() {
+gulp.task('default', function(cb) {
+  seq('watch', cb);
 });
 
 
