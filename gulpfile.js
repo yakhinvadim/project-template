@@ -25,6 +25,7 @@ var autoprefixer = require('autoprefixer'),
 var paths = {
   jade: 'src/**/*.jade',
   css: 'src/css/**/*.css',
+  fonts: 'src/fonts/*',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
   icons: 'src/icons/*.svg',
@@ -62,12 +63,13 @@ gulp.task('default', function(cb) {
 });
 
 gulp.task('build', function(cb) {
-  seq('clean', ['html', 'css', 'js', 'img', 'icons', 'temp'], cb);
+  seq('clean', ['html', 'css', 'fonts', 'js', 'img', 'icons', 'temp'], cb);
 });
 
 gulp.task('watch', ['build'], function() {
   watch( paths.jade,  function() { seq('html');  });
   watch( paths.css,   function() { seq('css');   });
+  watch( paths.fonts, function() { seq('fonts'); });
   watch( paths.js,    function() { seq('js');    });
   watch( paths.img,   function() { seq('img');   });
   watch( paths.icons, function() { seq('icons'); });
@@ -96,6 +98,11 @@ gulp.task('css', function() {
     .pipe( postcss(postcssProcessors) )
     .pipe( sourcemaps.write('.') )
     .pipe( gulp.dest('dist/resources/css') );
+});
+
+gulp.task('fonts', function() {
+  return gulp.src( paths.fonts )
+    .pipe( gulp.dest('dist/fonts') )
 });
 
 gulp.task('js', function() {
