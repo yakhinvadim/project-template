@@ -13,7 +13,8 @@ var autoprefixer = require('autoprefixer'),
     precss       = require('precss'),
     ftp          = require('vinyl-ftp'),
     rimraf       = require('rimraf'),
-    seq          = require('run-sequence');
+    seq          = require('run-sequence'),
+    express      = require('express');
 
 /* ==========================================================================
    variables
@@ -49,7 +50,7 @@ var ftpUploadAddress = '/public_html';
    ========================================================================== */
 
 gulp.task('default', function(cb) {
-  seq('watch', cb);
+  seq('watch', 'express', cb);
 });
 
 
@@ -167,4 +168,13 @@ gulp.task('ftp', function() {
 
 gulp.task('clean', function(cb) {
   rimraf('dist', cb);
+});
+
+/* ==========================================================================
+   'gulp server' task
+   (run localhost:4000)
+   ========================================================================== */
+
+gulp.task('express', function() {
+  express().use(express.static('dist')).listen(4000);
 });
