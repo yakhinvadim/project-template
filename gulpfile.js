@@ -49,6 +49,7 @@ var ftpUploadAddress = '/public_html';
 var onError = function (err) {
   gutil.beep();
   console.log(err);
+  this.emit('end');
 };
 
 
