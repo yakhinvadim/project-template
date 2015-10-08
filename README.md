@@ -24,7 +24,7 @@ Command | Task
 :--- | :---
 `gulp build` | build /dist from /src
 `gulp watch` | build, then watch for changes in /src and automatically run secondary tasks (below) to process these changes
-`gulp` | build, run [localhost:4000](localhost:4000) and watch for changes
+`gulp` | build, run [localhost:4000](http://localhost:4000/) and watch for changes
 
 ### Secondary tasks
 
@@ -42,5 +42,5 @@ Command | Task
 Command | Task
 :--- | :---
 `gulp ftp` | upload /dist to ftp (don't forget to provide credentials and upload address in section **variables** in gulpfile.js)
-`gulp server` | run localhost:4000
+`gulp server` | run [localhost:4000](http://localhost:4000/)
 `gulp clean` | clean /dist
