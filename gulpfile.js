@@ -15,7 +15,8 @@ var autoprefixer = require('autoprefixer'),
     ftp          = require('vinyl-ftp'),
     rimraf       = require('rimraf'),
     seq          = require('run-sequence'),
-    express      = require('express');
+    express      = require('express'),
+    commonBem    = require('common-bem');
 
 
 /* ==========================================================================
@@ -87,7 +88,10 @@ gulp.task('server', function() {
 gulp.task('html', function() {
   return gulp.src( paths.jade )
     .pipe( plumber({ errorHandler: onError }))
-    .pipe( jade({ pretty: true }) )
+    .pipe( jade({
+      pretty: true,
+      locals: { commonBem: commonBem },
+    }) )
     .pipe( gulp.dest('dist') );
 });
 
