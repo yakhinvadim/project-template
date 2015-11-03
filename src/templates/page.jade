@@ -1,3 +1,4 @@
+- var bem = commonBem.lock('bem');
 doctype html
 html(lang="ru")
   head
@@ -11,5 +12,9 @@ html(lang="ru")
     block content                    
     
     include footer
+
+    div(class=bem())
+      span(class=bem('is', { here: true }))
+        | F12
 
     script(scr="js/main.js")
