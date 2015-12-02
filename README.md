@@ -33,8 +33,9 @@ Command | Task
 `gulp html` | compile .jade to .html
 `gulp css` | concatenate .css, process with postcss processors and create source-map
 `gulp js` | copy .js to /dist without changes
+`gulp fonts` | copy fonts to /dist without changes
 `gulp img` | optimize images
-`gulp icons` | build svg-sprite from separate svg-icons
+`gulp sprite-svg` | build svg-sprite from separate svg-icons
 `gulp temp` | copy temporarily files to /dist without changes
 
 ### Support tasks
@@ -42,5 +43,4 @@ Command | Task
 Command | Task
 :--- | :---
 `gulp ftp` | upload /dist to ftp (don't forget to provide credentials and upload address in section **variables** in gulpfile.js)
-`gulp server` | run [localhost:4000](http://localhost:4000/)
 `gulp clean` | clean /dist
