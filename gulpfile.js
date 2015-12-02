@@ -10,12 +10,15 @@ var autoprefixer = require('autoprefixer'),
     svgstore     = require('gulp-svgstore'),
     watch        = require('gulp-watch'),
     gutil        = require('gulp-util'),
+    rename       = require('gulp-rename'),
     calc         = require('postcss-calc'),
+    postcssSVG   = require('postcss-svg'),
+    cssImport    = require('postcss-import'),
     precss       = require('precss'),
     ftp          = require('vinyl-ftp'),
     rimraf       = require('rimraf'),
     seq          = require('run-sequence'),
-    express      = require('express');
+    browserSync  = require('browser-sync').create();
 
 
 /* ==========================================================================
@@ -24,18 +27,21 @@ var autoprefixer = require('autoprefixer'),
 
 var paths = {
   jade: 'src/**/*.jade',
+  jadePages: 'src/*.jade',
   css: 'src/css/**/*.css',
   fonts: 'src/fonts/*',
   js: 'src/js/**/*.js',
   img: 'src/img/*',
-  icons: 'src/icons/*.svg',
-  temp: 'src/temp/*'
+  spriteSvg: 'src/sprite-svg/*.svg',
+  temp: 'src/temp/**/*'
 };
 
 var postcssProcessors = [
+  cssImport({ glob: true }),
   precss(),
   calc(),
-  autoprefixer({ browsers: ['> 0.15% in RU'] })
+  postcssSVG({ paths: ['src/sprite-css'], svgo: true }),
+  autoprefixer({ browsers: ['last 2 version'] })
 ];
 
 var ftpConnection = ftp.create({
@@ -45,7 +51,7 @@ var ftpConnection = ftp.create({
   parallel: 10
 });
 
-var ftpUploadAddress = '/public_html';
+var ftpUploadAddress = '';
 
 var onError = function(err) {
   gutil.beep();
@@ -63,17 +69,17 @@ gulp.task('default', function(cb) {
 });
 
 gulp.task('build', function(cb) {
-  seq('clean', ['html', 'css', 'fonts', 'js', 'img', 'icons', 'temp'], cb);
+  seq('clean',['html', 'css', 'fonts', 'js', 'img', 'sprite-svg', 'temp'], cb);
 });
 
 gulp.task('watch', ['build'], function() {
-  watch( paths.jade,  function() { seq('html');  });
-  watch( paths.css,   function() { seq('css');   });
-  watch( paths.fonts, function() { seq('fonts'); });
-  watch( paths.js,    function() { seq('js');    });
-  watch( paths.img,   function() { seq('img');   });
-  watch( paths.icons, function() { seq('icons'); });
-  watch( paths.temp,  function() { seq('temp');  });
+  watch( paths.jade,      function() { seq('html');       });
+  watch( paths.css,       function() { seq('css');        });
+  watch( paths.fonts,     function() { seq('fonts');      });
+  watch( paths.js,        function() { seq('js');         });
+  watch( paths.img,       function() { seq('img');        });
+  watch( paths.spriteSvg, function() { seq('sprite-svg'); });
+  watch( paths.temp,      function() { seq('temp');       });
 });
 
 gulp.task('clean', function(cb) {
@@ -81,33 +87,37 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('server', function() {
-  express().use(express.static('dist')).listen(4000);
+  browserSync.init({ server: { baseDir: 'dist' } });
 });
 
 gulp.task('html', function() {
-  return gulp.src( paths.jade )
+  return gulp.src( paths.jadePages )
     .pipe( plumber({ errorHandler: onError }))
     .pipe( jade({ pretty: true }) )
-    .pipe( gulp.dest('dist') );
+    .pipe( gulp.dest('dist') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('css', function() {
-  return gulp.src('src/css/style.css')
+  return gulp.src('src/css/base.css')
     .pipe( plumber({ errorHandler: onError }))
     .pipe( sourcemaps.init() )
     .pipe( postcss(postcssProcessors) )
     .pipe( sourcemaps.write('.') )
-    .pipe( gulp.dest('dist/resources/css') );
+    .pipe( gulp.dest('dist/resources/css') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('fonts', function() {
   return gulp.src( paths.fonts )
-    .pipe( gulp.dest('dist/fonts') )
+    .pipe( gulp.dest('dist/resources/fonts') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('js', function() {
   return gulp.src( paths.js )
     .pipe( gulp.dest('dist/resources/js') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('img', function () {
@@ -118,23 +128,26 @@ gulp.task('img', function () {
       interlaced: true,
       multipass: true
     }))
-    .pipe( gulp.dest('dist/resources/img') );
+    .pipe( gulp.dest('dist/resources/img') )
+    .pipe( browserSync.stream() );
 });
 
-gulp.task('icons', function() {
-  return gulp.src( paths.icons )
+gulp.task('sprite-svg', function() {
+  return gulp.src( paths.spriteSvg )
     .pipe( svgstore() )
     .pipe( imagemin({ multipass: true }))
-    .pipe( gulp.dest('dist/resources/img') );
+    .pipe( rename('sprite.svg'))
+    .pipe( gulp.dest('dist/resources/img') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('temp', function() {
   return gulp.src( paths.temp )
     .pipe( gulp.dest('dist/temp') )
+    .pipe( browserSync.stream() );
 });
 
 gulp.task('ftp', function() {
   return gulp.src('dist/**/*' , { buffer: false })
-    .pipe( ftpConnection.newer( ftpUploadAddress ) )
     .pipe( ftpConnection.dest( ftpUploadAddress ) );
 });
